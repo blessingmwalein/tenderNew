@@ -44,7 +44,7 @@ export default function UserTenders() {
     const amount = document.querySelector("#amount").value;
 
     await contract.methods.placeBid(tenderId, title, description, amount).send({
-      from: "0xdfF33B82fC92e2FB3A9F8C6CBee015b9a816bf4C",
+      from: "0x2A99801af03E3D2Ec1Ac19cA74740B59CDdA79B3",
       gas: 3000000,
     });
     window.location.reload();
