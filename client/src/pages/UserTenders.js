@@ -9,6 +9,7 @@ export default function UserTenders() {
   });
   const [data, setData] = useState([]);
   const [tenderId, setTenderId] = useState(0);
+  const [userAddress, setUserAddress] = useState("null");
 
   useEffect(() => {
     const provider = new Web3.providers.HttpProvider("HTTP://127.0.0.1:7545");
@@ -30,7 +31,10 @@ export default function UserTenders() {
     const { contract } = state;
     async function readData() {
       const data = await contract.methods.getOpenTenders().call();
-
+      const accounts = await window.ethereum.request({
+        method: "eth_requestAccounts",
+      });
+      setUserAddress(accounts[0]);
       setData(data);
       console.log(data[0]);
     }
@@ -44,7 +48,7 @@ export default function UserTenders() {
     const amount = document.querySelector("#amount").value;
 
     await contract.methods.placeBid(tenderId, title, description, amount).send({
-      from: "0x2A99801af03E3D2Ec1Ac19cA74740B59CDdA79B3",
+      from: userAddress,
       gas: 3000000,
     });
     window.location.reload();

@@ -66,7 +66,7 @@ export default function ViewTenderUser() {
     await contract.methods
       .setTender(title, description, startDate, endDate, status, numBids)
       .send({
-        from: "0x2A99801af03E3D2Ec1Ac19cA74740B59CDdA79B3",
+        from: userAddress,
         gas: 3000000,
       });
     window.location.reload();
