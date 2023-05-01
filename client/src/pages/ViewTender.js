@@ -76,7 +76,7 @@ export default function ViewTender() {
     // const accounts = await window.ethereum.request({
     //     method: "eth_requestAccounts",
     //     });
-    await contract.methods.acceptBid(tenderId, "Accept").send({
+    await contract.methods.acceptBid(tenderId, "Accepted").send({
       from: userAddress,
       gas: 3000000,
     });
@@ -131,6 +131,7 @@ export default function ViewTender() {
                         <tr>
                           <th>Title</th>
                           <th>Description</th>
+                          <th>Company</th>
                           <th class="center">Amount</th>
                           <th class="center">Status</th>
                           <th class="right">Action</th>
@@ -142,6 +143,7 @@ export default function ViewTender() {
                             <tr>
                               <td class="left strong">{bid.title}</td>
                               <td class="left">{bid.description}</td>
+                              <td class="left">{bid.company}</td>
                               <td class="right">{bid.amount}</td>
                               <td class="center">{bid.status}</td>
                               <td class="right">

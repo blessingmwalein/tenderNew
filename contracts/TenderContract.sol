@@ -22,6 +22,7 @@ contract TenderContract {
         uint256 amount;
         string status;
         address bidderAddress;
+        string company;
     }
 
     //define tender map and populate with dummy tender
@@ -61,6 +62,7 @@ contract TenderContract {
         uint _tenderId,
         string memory _title,
         string memory _description,
+        string memory _company,
         uint256 _amount
     ) public {
         Bid memory newBid = Bid(
@@ -70,7 +72,8 @@ contract TenderContract {
             _description,
             _amount,
             "Pending",
-            msg.sender
+            msg.sender,
+            _company
         );
         bids.push(newBid);
         lastBidId++;

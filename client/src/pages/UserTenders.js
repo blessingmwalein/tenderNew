@@ -46,11 +46,14 @@ export default function UserTenders() {
     const title = document.querySelector("#title").value;
     const description = document.querySelector("#description").value;
     const amount = document.querySelector("#amount").value;
+    const company = document.querySelector("#company").value;
 
-    await contract.methods.placeBid(tenderId, title, description, amount).send({
-      from: userAddress,
-      gas: 3000000,
-    });
+    await contract.methods
+      .placeBid(tenderId, title, description, company, amount)
+      .send({
+        from: userAddress,
+        gas: 3000000,
+      });
     window.location.reload();
   }
   function navigate(tenderId) {
@@ -98,29 +101,27 @@ export default function UserTenders() {
                                   </a>
                                 </td>
                                 <td>
-                                 
-                                    <button
-                                      onClick={() => navigate(tender.tenderId)}
-                                      class="btn btn-danger btn-sm"
+                                  <button
+                                    onClick={() => navigate(tender.tenderId)}
+                                    class="btn btn-danger btn-sm"
+                                  >
+                                    View
+                                  </button>
+                                  {tender.status === "Open" ? (
+                                    <a
+                                      href="#"
+                                      data-bs-toggle="modal"
+                                      data-bs-target="#createNewTender"
+                                      class="btn btn-danger"
+                                      onClick={() =>
+                                        setTenderId(tender.tenderId)
+                                      }
                                     >
-                                      View
-                                    </button>
-                                    {tender.status === "Open" ? (
-                                      <a
-                                        href="#"
-                                        data-bs-toggle="modal"
-                                        data-bs-target="#createNewTender"
-                                        class="btn btn-danger"
-                                        onClick={() =>
-                                          setTenderId(tender.tenderId)
-                                        }
-                                      >
-                                        Bid
-                                      </a>
-                                    ) : (
-                                      ""
-                                    )}
-                                  
+                                      Bid
+                                    </a>
+                                  ) : (
+                                    ""
+                                  )}
                                 </td>
                               </tr>
                             );
@@ -169,6 +170,17 @@ export default function UserTenders() {
                       type="text"
                       class="form-control"
                       id="title"
+                      placeholder=""
+                    />
+                  </div>
+                  <div class="col-md-12">
+                    <label class="form-label" for="inputEmail4">
+                      Company
+                    </label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="company"
                       placeholder=""
                     />
                   </div>
